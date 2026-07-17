@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: mongodb
+  namespace: wanderlust
+
+  labels:
+    app: mongodb
+    tier: database
+
+spec:
+  serviceName: mongodb-service
+
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: mongodb
+
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        tier: database
+
+    spec:
+      containers:
+        - name: mongodb
+
+          image: mongo:7
+
+          ports:
+            - containerPort: 27017
+
+          env:
+            - name: MONGO_INITDB_DATABASE
+              value: wanderlust
+
+          volumeMounts:
+            - name: mongodb-storage
+              mountPath: /data/db
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-storage
+
+      spec:
+        accessModes:
+          - ReadWriteOnce
+
+        resources:
+          requests:
+            storage: 5Gi

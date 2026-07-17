@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: frontend-service
+  namespace: wanderlust
+
+  labels:
+    app: wanderlust-frontend
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: wanderlust-frontend
+
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5173

@@ -32,7 +32,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: wanderlust-backend
-        image: xerox2/wanderlust-backend:latest
+        image: xerox2/wanderlust-backend:9
         imagePullPolicy: Always
         envFrom:
         - configMapRef:

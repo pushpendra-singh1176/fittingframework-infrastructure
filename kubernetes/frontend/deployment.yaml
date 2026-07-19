@@ -33,7 +33,7 @@ spec:
       containers:
         - name: frontend
 
-          image: your-dockerhub-username/wanderlust-frontend:latest
+          image: xerox2/wanderlust-frontend:latest
 
           imagePullPolicy: Always
 
